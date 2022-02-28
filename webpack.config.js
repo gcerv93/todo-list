@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/index.js',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'To-do List',
+      title: 'TodoOrNot',
       template: './src/index.html'
     }),
     new MiniCssExtractPlugin( { filename: 'styles.css' }),

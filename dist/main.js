@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\nconst todoFactory = (title, description, dueDate, priority, finished) => {\n  return {\n    title,\n    description,\n    dueDate,\n    priority,\n    finished\n  };\n};\n\nconst projectFactory = (name) => {\n  const todos = [];\n\n  function addToDo(todo) {\n    todos.push(todo);\n  };\n\n  return { todos, addToDo };\n};\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ })
 
