@@ -7,9 +7,19 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
-  <header>
-    <img src="<%=require("./images/menu.svg")%>" alt="menu-icon">
-    <p>TodoOrNot</p>
-  </header>
+  <div class="pagewrap">
+    <header>
+      <img src="<%=require('./images/menu.svg')%>" alt="menu-icon">
+      <p>TodoOrNot</p>
+    </header>
+    <div class="main">
+      <div class="sidebar"></div>
+      <div class="content"></div>
+    </div>
+    <footer>
+      <p>Created by <a href="https://github.com/gcerv93" target="_blank">gcerv93</a></p>
+      <img src="<%=require('./images/github.svg')%>" alt="">
+    </footer>
+  </div>
 </body>
 </html>

@@ -47,14 +47,48 @@ table {
 	border-spacing: 0;
 }
 
+.pagewrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 header {
   font-size: 2rem;
-  background-color: lightblue;
   padding: 10px;
   display: flex;
   align-items: center;
+
+  /* temp */
+  background-color: lightblue;
 }
 
 header p {
   padding-left: 10px;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+}
+
+.sidebar {
+  width: 300px;
+  /* temp */
+  background-color: lightgrey;
+}
+
+.content {
+  flex: 1;
+  /* temp for layout */
+  background-color: lightcyan;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+
+  /* temp */
+  background-color: lightblue;
 }
