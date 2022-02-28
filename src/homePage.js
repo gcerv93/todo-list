@@ -1,24 +1,37 @@
 import Plus from './images/plus-sign-rectangle.svg';
+import {todoFactory, projectFactory} from './factories.js';
 
+const defaultProject = projectFactory('default');
+
+// task button for the main page, will this be usable for the project screens?
 const taskButtonTemplate = () => {
   const plusSign = new Image();
   plusSign.src = Plus;
 
-  const addTaskButton = document.createElement('div');
-  addTaskButton.classList.add('default-task-button');
-  addTaskButton.appendChild(plusSign);
+  const taskButton = document.createElement('div');
+  taskButton.classList.add('default-task-button');
+  taskButton.appendChild(plusSign);
 
   const text = document.createElement('p');
   text.textContent = 'Add Task';
-  addTaskButton.appendChild(text);
+  taskButton.appendChild(text);
 
-  return addTaskButton;
+  return taskButton;
 };
 
-const taskTemplate = (name) => {
+// add a date display here in the future
+const taskTemplate = (todo) => {
   const templateDiv = document.createElement('div');
+
   templateDiv.classList.add('task-template');
-  templateDiv.textContent = name;
+
+  const imgDiv = document.createElement('div');
+  imgDiv.classList.add('unchecked');
+  templateDiv.appendChild(imgDiv);
+
+  const nameText = document.createElement('p');
+  nameText.textContent = todo.title;
+  templateDiv.appendChild(nameText);
 
   return templateDiv;
 };
@@ -35,13 +48,16 @@ const mainPage = () => {
 
   const tasksDiv = document.createElement('div');
 
-  // TEMP: checking the display for tasks
-  tasksDiv.appendChild(taskTemplate('dude'));
-  tasksDiv.appendChild(taskTemplate('bro'));
-  tasksDiv.appendChild(taskTemplate('what'));
-
   taskContent.appendChild(tasksDiv);
-  taskContent.appendChild(taskButtonTemplate());
+
+  const taskBtn = taskButtonTemplate();
+  taskContent.appendChild(taskBtn);
+  taskBtn.addEventListener('click', () => {
+    const task = todoFactory('dude', 'work', 'sunday', 'blue', false);
+    defaultProject.addToDo(task);
+    tasksDiv.appendChild(taskTemplate(task));
+    console.log(defaultProject);
+  });
 
   content.appendChild(taskContent);
 };

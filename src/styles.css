@@ -88,6 +88,7 @@ header p {
   cursor: pointer;
 }
 
+/* temp */
 .side-nav div:hover {
   background-color: gray;
 }
@@ -113,12 +114,9 @@ footer {
 
 .task-content {
   width: 50%;
-  height: 100%;
   padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  /* temp */
-  background-color: lightpink;
 }
 
 .task-heading {
@@ -130,10 +128,14 @@ footer {
 .default-task-button {
   height: 20px;
   padding: 0.5rem;
-  background-color: lightblue;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.default-task-button:hover {
+  background-color: lightgray;
 }
 
 .default-task-button img {
@@ -145,4 +147,13 @@ footer {
   padding: 0.5rem;
   background-color: lightseagreen;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.unchecked {
+  background: url(./images/checkbox.svg);
+  width: 12px;
+  height: 12px;
+  margin-right: 0.5rem;
 }
