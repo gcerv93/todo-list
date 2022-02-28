@@ -1,3 +1,4 @@
+import mainPage from './homePage';
 import './styles.css';
 
 const todoFactory = (title, description, dueDate, priority, finished) => {
@@ -19,3 +20,5 @@ const projectFactory = (name) => {
 
   return { todos, addToDo };
 };
+
+mainPage();

@@ -103,6 +103,8 @@ header p {
   flex: 1;
   /* temp for layout */
   background-color: lightcyan;
+  display: flex;
+  justify-content: center;
 }
 
 footer {
@@ -110,5 +112,41 @@ footer {
   justify-content: center;
   /* temp */
   background-color: lightblue;
+}
+
+.task-content {
+  width: 50%;
+  height: 100%;
+  padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  /* temp */
+  background-color: lightpink;
+}
+
+.task-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.default-task-button {
+  height: 20px;
+  padding: 0.5rem;
+  background-color: lightblue;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.default-task-button img {
+  padding-right: 1rem;
+}
+
+.task-template {
+  height: 20px;
+  padding: 0.5rem;
+  background-color: lightseagreen;
+  border-radius: 5px;
 }
 
