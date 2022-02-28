@@ -13,7 +13,22 @@
       <p>TodoOrNot</p>
     </header>
     <div class="main">
-      <div class="sidebar"></div>
+      <div class="sidebar">
+        <div class="side-nav">
+          <div class="all-tasks">
+            <img src="<%=require('./images/inbox-full-outline.svg')%>" alt="inbox">
+            <p>All Tasks</p>
+          </div>
+          <div class="today">
+            <img src="<%=require('./images/calendar-today.svg')%>" alt="today-calendar">
+            <p>Today</p>
+          </div>
+          <div class="week">
+            <img src="<%=require('./images/calendar-week.svg')%>" alt="week-calendar">
+            <p>This Week</p>
+          </div>
+        </div>
+      </div>
       <div class="content"></div>
     </div>
     <footer>

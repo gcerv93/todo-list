@@ -74,8 +74,26 @@ header p {
 
 .sidebar {
   width: 300px;
+  box-sizing: border-box;
+  padding: 20px 30px;
   /* temp */
   background-color: lightgrey;
+}
+
+.side-nav div {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.side-nav div:hover {
+  background-color: gray;
+}
+
+.side-nav img {
+  padding-right: 1rem;
 }
 
 .content {
@@ -87,8 +105,6 @@ header p {
 footer {
   display: flex;
   justify-content: center;
-  padding: 5px;
-
   /* temp */
   background-color: lightblue;
 }
