@@ -50,3 +50,12 @@ table {
 	border-spacing: 0;
 }
 
+header {
+  font-size: 2rem;
+  background-color: lightblue;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+}
+
+
