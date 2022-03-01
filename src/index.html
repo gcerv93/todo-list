@@ -28,6 +28,25 @@
             <p>This Week</p>
           </div>
         </div>
+        <div class="bottom-side-nav">
+          <p class="bottom-side-header">Projects</p>
+          <!-- <div class="project-div">
+            <img src="<%=require('./images/project.svg')%>" alt="project">
+            <p>Project</p>
+          </div> -->
+          <form class="project-form" action="">
+            <label for="name">Name: </label>
+            <input type="text">
+            <div class="project-form-buttons">
+              <button class="project-submit-btn" type="button">Submit</button>
+              <button type="button">Cancel</button>
+            </div>
+          </form>
+          <div class="add-project-btn">
+            <img src="<%=require('./images/plus-sign-rectangle.svg')%>" alt="plus-sign-rectangle">
+            <p>Add Project</p>
+          </div>
+        </div>
       </div>
       <div class="content">
         <div class="task-content">
@@ -44,6 +63,7 @@
               <input type="date" id="dueDate">
               <div>
                 <button id="task-form" type="button">Submit</button>
+                <button id="cancel" type="button">Cancel</button>
               </div>
             </form>
           </div>

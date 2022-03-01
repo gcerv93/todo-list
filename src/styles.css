@@ -93,8 +93,30 @@ header p {
   background-color: gray;
 }
 
-.side-nav img {
+.sidebar img {
   padding-right: 1rem;
+}
+
+.bottom-side-nav {
+  margin-top: 10px;
+}
+
+.bottom-side-header {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.bottom-side-nav div {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* temp */
+.bottom-side-nav div:not(.project-form, .project-form-buttons):hover {
+  background-color: gray;
 }
 
 .content {
@@ -188,3 +210,31 @@ footer {
   border-radius: 5px;
   resize: none;
 }
+
+.form-container button {
+  padding: 2px;
+}
+
+.project-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-form input {
+  border-radius: 5px;
+  height: 1.5rem;
+}
+
+.project-form-buttons button {
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.project-submit-btn {
+  margin-right: 10px;
+}
+
