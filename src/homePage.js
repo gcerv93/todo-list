@@ -1,7 +1,4 @@
 import Plus from './images/plus-sign-rectangle.svg';
-import {todoFactory, projectFactory} from './factories.js';
-
-const defaultProject = projectFactory('default');
 
 // task button for the main page, will this be usable for the project screens?
 const taskButtonTemplate = () => {
@@ -36,30 +33,26 @@ const taskTemplate = (todo) => {
   return templateDiv;
 };
 
-const mainPage = () => {
+const homePage = () => {
   const content = document.querySelector('.content');
-  const taskContent = document.createElement('div');
-  taskContent.classList.add('task-content');
+  const taskContent = document.querySelector('.task-content');
 
-  const heading = document.createElement('div');
+  const heading = document.querySelector('.task-heading');
   heading.textContent = 'All Tasks';
-  heading.classList.add('task-heading');
-  taskContent.appendChild(heading);
 
   const tasksDiv = document.createElement('div');
 
-  taskContent.appendChild(tasksDiv);
+  const taskForm = document.querySelector('.form-container');
+  taskContent.insertBefore(tasksDiv, taskForm);
 
   const taskBtn = taskButtonTemplate();
   taskContent.appendChild(taskBtn);
   taskBtn.addEventListener('click', () => {
-    const task = todoFactory('dude', 'work', 'sunday', 'blue', false);
-    defaultProject.addToDo(task);
-    tasksDiv.appendChild(taskTemplate(task));
-    console.log(defaultProject);
+    taskForm.style.display = 'flex';
+    // tasksDiv.append(taskTemplate({title: 'dude'}));
   });
 
   content.appendChild(taskContent);
 };
 
-export default mainPage;
+export default homePage;
