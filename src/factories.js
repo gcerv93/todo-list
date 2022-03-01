@@ -9,13 +9,19 @@ const todoFactory = (title, description, dueDate, priority, finished) => {
 };
 
 const projectFactory = (name) => {
+  name: name;
+  
   const tasks = [];
 
   function addTask(task) {
     this.tasks.push(task);
   };
 
-  return { addTask };
+  function getName() {
+    this.name;
+  };
+
+  return { name, addTask, getName };
 };
 
 export { todoFactory, projectFactory }
