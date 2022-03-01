@@ -9,11 +9,11 @@ const projectManager = (() => {
     projects.push(project);
   };
 
-  // work on a delete Project function 
-  // 
-  // 
+  function deleteProject(index) {
+    projects.splice(index, 1);
+  };
 
-  return { getProjects, addProject }
+  return { getProjects, addProject, deleteProject }
 })();
 
 export default projectManager;
