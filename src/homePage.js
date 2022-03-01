@@ -33,26 +33,26 @@ const taskTemplate = (todo) => {
   return templateDiv;
 };
 
-const homePage = () => {
-  const content = document.querySelector('.content');
-  const taskContent = document.querySelector('.task-content');
+// const homePage = () => {
+//   const content = document.querySelector('.content');
+//   const taskContent = document.querySelector('.task-content');
 
-  const heading = document.querySelector('.task-heading');
-  heading.textContent = 'All Tasks';
+//   const heading = document.querySelector('.task-heading');
+//   heading.textContent = 'All Tasks';
 
-  const tasksDiv = document.createElement('div');
+//   const tasksDiv = document.createElement('div');
 
-  const taskForm = document.querySelector('.form-container');
-  taskContent.insertBefore(tasksDiv, taskForm);
+//   const taskForm = document.querySelector('.form-container');
+//   taskContent.insertBefore(tasksDiv, taskForm);
 
-  const taskBtn = taskButtonTemplate();
-  taskContent.appendChild(taskBtn);
-  taskBtn.addEventListener('click', () => {
-    taskForm.style.display = 'flex';
-    // tasksDiv.append(taskTemplate({title: 'dude'}));
-  });
+//   const taskBtn = taskButtonTemplate();
+//   taskContent.appendChild(taskBtn);
+//   taskBtn.addEventListener('click', () => {
+//     taskForm.style.display = 'flex';
+//     // tasksDiv.append(taskTemplate({title: 'dude'}));
+//   });
 
-  content.appendChild(taskContent);
-};
+//   content.appendChild(taskContent);
+// };
 
-export { taskTemplate, taskButtonTemplate, homePage };
+export { taskTemplate, taskButtonTemplate };

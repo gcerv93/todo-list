@@ -13,13 +13,21 @@ const displayProject = (project) => {
   tasksDiv.setAttribute('id', 'tasks-div');
 
   const taskForm = document.querySelector('.form-container');
+  taskForm.dataset.index = projectManager.getProjectIndex(project);
   projectContent.insertBefore(tasksDiv, taskForm);
 
+  const hiddenInput = document.querySelector('#project');
+  hiddenInput.value = project.getName();
+
   const taskBtn = taskButtonTemplate();
-  taskBtn.dataset.index = projectManager.getProjectIndex(project);
   projectContent.appendChild(taskBtn);
   taskBtn.addEventListener('click', () => {
     taskForm.style.display = 'flex';
+  });
+
+  const formCancel = document.querySelector('#task-form-cancel');
+  formCancel.addEventListener('click', () => {
+    taskForm.style.display = 'none';
   });
 };
 
