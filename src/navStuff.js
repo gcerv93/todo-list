@@ -43,7 +43,7 @@ const navStuff = (() => {
   formSubmit.addEventListener('click', () => {
     const project = projectFactory(projectName.value);
     pm.addProject(project);
-    const projectDiv = projectDivTemplate(project.name);
+    const projectDiv = projectDivTemplate(project.getName());
     bottomNav.insertBefore(projectDiv, addProjectForm);
     addProjectForm.reset();
     addProjectForm.style.display = 'none';

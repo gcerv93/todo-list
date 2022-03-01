@@ -1,4 +1,4 @@
-const todoFactory = (title, description, dueDate, priority, finished) => {
+const todoFactory = (title, description, dueDate, important, finished) => {
   return {
     title,
     description,
@@ -18,7 +18,7 @@ const projectFactory = (name) => {
   };
 
   function getName() {
-    this.name;
+    return this.name;
   };
 
   return { name, addTask, getName };
