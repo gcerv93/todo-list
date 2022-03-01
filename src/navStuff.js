@@ -19,17 +19,14 @@ const displayProjects = () => {
     projectDiv.addEventListener('click', () => {
       const taskBtn = document.querySelector('.default-task-button');
       const tasksDiv = document.querySelector('#tasks-div');
-      if (taskBtn) {
-        taskBtn.remove();
-      }
-      if (tasksDiv) {
-        tasksDiv.remove();
-      }
+      if (taskBtn) taskBtn.remove();
+      if (tasksDiv) tasksDiv.remove();
       dispProject(project);
     });
 
     const closeBtn = document.querySelector(`#close[data-index="${index}"]`);
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       pm.deleteProject(index);
       clearProjectDivDisplay();
       displayProjects();
