@@ -55,4 +55,4 @@ const homePage = () => {
   content.appendChild(taskContent);
 };
 
-export default homePage;
+export { taskTemplate, taskButtonTemplate, homePage };

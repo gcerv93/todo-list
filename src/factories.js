@@ -21,7 +21,11 @@ const projectFactory = (name) => {
     return this.name;
   };
 
-  return { name, addTask, getName };
+  function getTasks() {
+    return this.tasks;
+  };
+
+  return { name, addTask, getName, getTasks };
 };
 
 export { todoFactory, projectFactory }

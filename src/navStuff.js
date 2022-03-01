@@ -2,8 +2,9 @@ import pm from './projectManager.js';
 import {projectFactory} from './factories.js';
 import Project from './images/project.svg';
 import Close from './images/close-thick.svg';
+import dispProject from './projectDisplay.js';
 
-const clearProjectDisplay = () => {
+const clearProjectDivDisplay = () => {
   document.querySelectorAll('.project-div').forEach((element) => element.remove());
 };
 
@@ -15,10 +16,22 @@ const displayProjects = () => {
     const projectDiv = projectDivTemplate(project.name, index);
     bottomNav.insertBefore(projectDiv, form);
 
+    projectDiv.addEventListener('click', () => {
+      const taskBtn = document.querySelector('.default-task-button');
+      const tasksDiv = document.querySelector('#tasks-div');
+      if (taskBtn) {
+        taskBtn.remove();
+      }
+      if (tasksDiv) {
+        tasksDiv.remove();
+      }
+      dispProject(project);
+    });
+
     const closeBtn = document.querySelector(`#close[data-index="${index}"]`);
     closeBtn.addEventListener('click', () => {
       pm.deleteProject(index);
-      clearProjectDisplay();
+      clearProjectDivDisplay();
       displayProjects();
     });
   });
@@ -67,7 +80,7 @@ const navStuff = (() => {
     pm.addProject(project);
     addProjectForm.reset();
     addProjectForm.style.display = 'none';
-    clearProjectDisplay();
+    clearProjectDivDisplay();
     displayProjects();
   });
 })(); 

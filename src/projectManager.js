@@ -13,7 +13,16 @@ const projectManager = (() => {
     projects.splice(index, 1);
   };
 
-  return { getProjects, addProject, deleteProject }
+  function getProjectIndex(project) {
+    return projects.indexOf(project);
+  };
+
+  return {
+    getProjects,
+    addProject, 
+    deleteProject,
+    getProjectIndex
+  };
 })();
 
 export default projectManager;
