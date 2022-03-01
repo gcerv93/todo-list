@@ -119,6 +119,21 @@ header p {
   background-color: gray;
 }
 
+.bottom-side-nav div:not(.project-form, .project-form-buttons):hover #close {
+  display: block;
+}
+
+.project-div>img:last-child {
+  display: none;
+  margin-left: auto;
+  padding-right: 0;
+}
+
+.project-div>img:last-child:hover {
+  width: 18px;
+  height: 18px;
+}
+
 .content {
   flex: 1;
   /* temp for layout */
@@ -237,4 +252,3 @@ footer {
 .project-submit-btn {
   margin-right: 10px;
 }
-
