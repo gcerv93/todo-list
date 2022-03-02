@@ -12,7 +12,7 @@ const displayProjectNavs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
   const form = document.querySelector('.project-form');
   pm.getProjects().forEach((project, index) => {
-    console.log(project);
+    // console.log(project);
     const projectDiv = projectDivTemplate(project.name, index);
     bottomNav.insertBefore(projectDiv, form);
 

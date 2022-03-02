@@ -1,2 +1,3 @@
-import'./bottomNavStuff';
+import './topNavStuff';
+import './bottomNavStuff';
 import './styles.css';

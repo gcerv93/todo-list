@@ -34,7 +34,11 @@ const projectFactory = (name) => {
     tasks.splice(index, 1);
   };
 
-  return { name, addTask, getName, getTasks, deleteTask };
+  function getTaskIndex(task) {
+    return tasks.findIndex((element) => element === task);
+  };
+
+  return { name, addTask, getName, getTasks, deleteTask, getTaskIndex };
 };
 
 export { taskFactory, projectFactory }
