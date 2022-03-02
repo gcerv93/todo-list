@@ -1,10 +1,15 @@
 const taskFactory = (title, description, dueDate, important, finished) => {
+  function changeFinished() {
+    this.finished === true ? this.finished = false : this.finished = true;
+  };
+
   return {
     title,
     description,
     dueDate,
     important,
-    finished
+    finished,
+    changeFinished
   };
 };
 
@@ -25,7 +30,11 @@ const projectFactory = (name) => {
     return tasks;
   };
 
-  return { name, addTask, getName, getTasks };
+  function deleteTask(index) {
+    this.tasks.splice(index, 1);
+  };
+
+  return { name, addTask, getName, getTasks, deleteTask };
 };
 
 export { taskFactory, projectFactory }

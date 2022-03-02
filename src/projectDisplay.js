@@ -1,6 +1,8 @@
 import projectManager from "./projectManager";
 import {taskTemplate, taskButtonTemplate} from './homePage.js';
 import {taskFactory} from './factories.js';
+import GreenCheck from './images/green-checkbox.svg';
+import Unchecked from './images/unchecked.svg';
 
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -11,11 +13,22 @@ const clearTasks = () => {
 
 const displayTasks = (project) => {
   const tasksDiv = document.querySelector('#tasks-div');
-  console.log(tasksDiv);
-  console.log(project);
-  project.getTasks().forEach((task) => {
-    const taskDiv = taskTemplate(task);
+  // console.log(tasksDiv);
+  // console.log(project);
+  project.getTasks().forEach((task, index) => {
+    const taskDiv = taskTemplate(task, index);
     tasksDiv.appendChild(taskDiv);
+
+    const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
+    checkImg.addEventListener('click', (e) => {
+      checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
+      task.changeFinished();
+    })
+
+    const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
+    closeTaskImg.addEventListener('click', (e) => {
+      console.log(index);
+    })
   });
 };
 
@@ -24,10 +37,10 @@ const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
 
-  const task = taskFactory(taskName.value, desc.value);
+  const task = taskFactory(taskName.value, desc.value, 'today', false, false);
   // console.log(task);
   project.addTask(task);
-  console.log(project.getTasks());
+  // console.log(project.getTasks());
 
   clearTasks();
   displayTasks(project);

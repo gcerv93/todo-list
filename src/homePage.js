@@ -27,6 +27,7 @@ const taskTemplate = (task, idx) => {
   const uncheckedImg = new Image();
   uncheckedImg.src = Unchecked;
   uncheckedImg.dataset.index = idx;
+  uncheckedImg.setAttribute('id', 'check-img');
   templateDiv.appendChild(uncheckedImg);
 
   const nameText = document.createElement('p');
@@ -36,6 +37,7 @@ const taskTemplate = (task, idx) => {
   const closeImg = new Image();
   closeImg.src = Close;
   closeImg.dataset.index = idx;
+  closeImg.setAttribute('id', 'close-task');
   templateDiv.appendChild(closeImg);
 
   return templateDiv;

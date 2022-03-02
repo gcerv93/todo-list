@@ -182,10 +182,15 @@ footer {
 .task-template {
   height: 20px;
   padding: 0.5rem;
-  background-color: lightseagreen;
+  background-color: white;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.task-template img{
+  cursor: pointer;
 }
 
 .form-container {
@@ -248,4 +253,10 @@ footer {
 
 #task-form-submit, #task-form-cancel {
   cursor: pointer;
+  padding : 5px;
+}
+
+.form-btns {
+  display: flex;
+  justify-content: center;
 }
