@@ -186,11 +186,23 @@ footer {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.task-template img:first-child {
+  margin-right: 10px;
 }
 
 .task-template img{
   cursor: pointer;
+}
+
+#close-task {
+  display: none;
+  margin-left: auto;
+}
+
+.task-template:hover #close-task {
+  display: block;
 }
 
 .form-container {

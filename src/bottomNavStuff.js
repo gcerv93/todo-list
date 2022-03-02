@@ -56,7 +56,7 @@ const projectDivTemplate = (name, idx) => {
   return projectDiv;
 };
 
-const navStuff = (() => {
+const bottomNavStuff = (() => {
   const addProjectForm = document.querySelector('.project-form');
   const addProjectBtn = document.querySelector('.add-project-btn');
 
@@ -82,4 +82,4 @@ const navStuff = (() => {
   });
 })(); 
 
-export default navStuff;
+export default bottomNavStuff;

@@ -1,2 +1,2 @@
-import navStuff from './navStuff';
+import'./bottomNavStuff';
 import './styles.css';
