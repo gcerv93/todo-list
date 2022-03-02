@@ -2,6 +2,13 @@
 // STILL SHOULD HAVE THIS NAME HOWEVER, CHANGE HOMEPAGE TO SOMETHING ELSE
 import projectManager from "./projectManager";
 import {taskTemplate, taskButtonTemplate} from './homePage.js';
+import taskFactory from './factories.js';
+
+const handleFormSubmits = () => {
+  const hiddenInput = document.querySelector('#project');
+  const project = projectManager.getProject(hiddenInput.value);
+  console.log(project);
+};
 
 const displayProject = (project) => {
   const projectContent = document.querySelector('.task-content');
@@ -29,6 +36,10 @@ const displayProject = (project) => {
   formCancel.addEventListener('click', () => {
     taskForm.style.display = 'none';
   });
+
+  const formSubmit = document.querySelector('#task-form-submit');
+  formSubmit.removeEventListener('click', handleFormSubmits);
+  formSubmit.addEventListener('click', handleFormSubmits);
 };
 
 export default displayProject;

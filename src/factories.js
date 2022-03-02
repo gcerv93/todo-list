@@ -1,4 +1,4 @@
-const todoFactory = (title, description, dueDate, important, finished) => {
+const taskFactory = (title, description, dueDate, important, finished) => {
   return {
     title,
     description,
@@ -28,4 +28,4 @@ const projectFactory = (name) => {
   return { name, addTask, getName, getTasks };
 };
 
-export { todoFactory, projectFactory }
+export { taskFactory, projectFactory }

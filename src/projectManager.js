@@ -17,11 +17,16 @@ const projectManager = (() => {
     return projects.indexOf(project);
   };
 
+  function getProject(projectName) {
+    return projects.find(project => project.getName() === projectName);
+  };
+
   return {
     getProjects,
     addProject, 
     deleteProject,
-    getProjectIndex
+    getProjectIndex,
+    getProject
   };
 })();
 
