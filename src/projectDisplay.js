@@ -2,15 +2,35 @@ import projectManager from "./projectManager";
 import {taskTemplate, taskButtonTemplate} from './homePage.js';
 import {taskFactory} from './factories.js';
 
+const clearTasks = () => {
+  const tasksDiv = document.querySelector('#tasks-div');
+  while (tasksDiv.firstChild) {
+    tasksDiv.removeChild(tasksDiv.firstChild);
+  };
+};
+
+const displayTasks = (project) => {
+  const tasksDiv = document.querySelector('#tasks-div');
+  console.log(tasksDiv);
+  console.log(project);
+  project.getTasks().forEach((task) => {
+    const taskDiv = taskTemplate(task);
+    tasksDiv.appendChild(taskDiv);
+  });
+};
+
 // UNFINISHED
 const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
 
   const task = taskFactory(taskName.value, desc.value);
-  console.log(task);
+  // console.log(task);
   project.addTask(task);
   console.log(project.getTasks());
+
+  clearTasks();
+  displayTasks(project);
 };
 
 const displayProject = (project) => {
@@ -26,6 +46,8 @@ const displayProject = (project) => {
   taskForm.style.display = 'none';
   taskForm.dataset.index = projectManager.getProjectIndex(project);
   projectContent.insertBefore(tasksDiv, taskForm);
+
+  displayTasks(project);
 
   const hiddenInput = document.querySelector('#project');
   hiddenInput.value = project.getName();

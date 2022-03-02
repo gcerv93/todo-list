@@ -35,6 +35,7 @@ const taskTemplate = (task, idx) => {
 
   const closeImg = new Image();
   closeImg.src = Close;
+  closeImg.dataset.index = idx;
   templateDiv.appendChild(closeImg);
 
   return templateDiv;
