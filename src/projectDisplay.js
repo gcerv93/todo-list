@@ -13,8 +13,6 @@ const clearTasks = () => {
 
 const displayTasks = (project) => {
   const tasksDiv = document.querySelector('#tasks-div');
-  // console.log(tasksDiv);
-  // console.log(project);
   project.getTasks().forEach((task, index) => {
     const taskDiv = taskTemplate(task, index);
     tasksDiv.appendChild(taskDiv);
@@ -45,10 +43,15 @@ const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
 
-  const task = taskFactory(taskName.value, desc.value, 'today', false, false);
-  // console.log(task);
+  const task = taskFactory(taskName.value, desc.value, dueDate.value, false, false);
+  console.log(task);
   project.addTask(task);
   // console.log(project.getTasks());
+
+  const taskFormContainer = document.querySelector('.form-container');
+  taskFormContainer.style.display = 'none';
+  const taskForm = document.querySelector('#task-form');
+  taskForm.reset();
 
   clearTasks();
   displayTasks(project);
@@ -63,10 +66,10 @@ const displayProject = (project) => {
   const tasksDiv = document.createElement('div');
   tasksDiv.setAttribute('id', 'tasks-div');
 
-  const taskForm = document.querySelector('.form-container');
-  taskForm.style.display = 'none';
-  taskForm.dataset.index = projectManager.getProjectIndex(project);
-  projectContent.insertBefore(tasksDiv, taskForm);
+  const taskFormContainer = document.querySelector('.form-container');
+  taskFormContainer.style.display = 'none';
+  taskFormContainer.dataset.index = projectManager.getProjectIndex(project);
+  projectContent.insertBefore(tasksDiv, taskFormContainer);
 
   displayTasks(project);
 
@@ -76,12 +79,14 @@ const displayProject = (project) => {
   const taskBtn = taskButtonTemplate();
   projectContent.appendChild(taskBtn);
   taskBtn.addEventListener('click', () => {
-    taskForm.style.display = 'flex';
+    taskFormContainer.style.display = 'flex';
   });
 
+  const taskForm = document.querySelector('#task-form');
   const formCancel = document.querySelector('#task-form-cancel');
   formCancel.addEventListener('click', () => {
-    taskForm.style.display = 'none';
+    taskFormContainer.style.display = 'none';
+    taskForm.reset();
   });
 
   const formSubmit = document.querySelector('#task-form-submit');
