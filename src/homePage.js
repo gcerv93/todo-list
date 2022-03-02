@@ -1,4 +1,6 @@
 import Plus from './images/plus-sign-rectangle.svg';
+import Unchecked from './images/unchecked.svg';
+import Close from './images/close-thick.svg';
 
 // task button for the main page, will this be usable for the project screens?
 const taskButtonTemplate = () => {
@@ -17,42 +19,25 @@ const taskButtonTemplate = () => {
 };
 
 // add a date display here in the future
-const taskTemplate = (todo) => {
+const taskTemplate = (task, idx) => {
   const templateDiv = document.createElement('div');
-
   templateDiv.classList.add('task-template');
+  templateDiv.dataset.index = idx;
 
-  const imgDiv = document.createElement('div');
-  imgDiv.classList.add('unchecked');
-  templateDiv.appendChild(imgDiv);
+  const uncheckedImg = new Image();
+  uncheckedImg.src = Unchecked;
+  uncheckedImg.dataset.index = idx;
+  templateDiv.appendChild(uncheckedImg);
 
   const nameText = document.createElement('p');
-  nameText.textContent = todo.title;
+  nameText.textContent = task.title;
   templateDiv.appendChild(nameText);
+
+  const closeImg = new Image();
+  closeImg.src = Close;
+  templateDiv.appendChild(closeImg);
 
   return templateDiv;
 };
-
-// const homePage = () => {
-//   const content = document.querySelector('.content');
-//   const taskContent = document.querySelector('.task-content');
-
-//   const heading = document.querySelector('.task-heading');
-//   heading.textContent = 'All Tasks';
-
-//   const tasksDiv = document.createElement('div');
-
-//   const taskForm = document.querySelector('.form-container');
-//   taskContent.insertBefore(tasksDiv, taskForm);
-
-//   const taskBtn = taskButtonTemplate();
-//   taskContent.appendChild(taskBtn);
-//   taskBtn.addEventListener('click', () => {
-//     taskForm.style.display = 'flex';
-//     // tasksDiv.append(taskTemplate({title: 'dude'}));
-//   });
-
-//   content.appendChild(taskContent);
-// };
 
 export { taskTemplate, taskButtonTemplate };

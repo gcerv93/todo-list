@@ -8,7 +8,7 @@ const clearProjectDivDisplay = () => {
   document.querySelectorAll('.project-div').forEach((element) => element.remove());
 };
 
-const displayProjects = () => {
+const displayProjectNavs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
   const form = document.querySelector('.project-form');
   pm.getProjects().forEach((project, index) => {
@@ -29,15 +29,15 @@ const displayProjects = () => {
       e.stopPropagation();
       pm.deleteProject(index);
       clearProjectDivDisplay();
-      displayProjects();
+      displayProjectNavs();
     });
   });
 };
 
-const projectDivTemplate = (name, i) => {
+const projectDivTemplate = (name, idx) => {
   const projectDiv = document.createElement('div');
   projectDiv.classList.add('project-div');
-  projectDiv.dataset.index = i;
+  projectDiv.dataset.index = idx;
 
   const projectImg = new Image();
   projectImg.src = Project;
@@ -50,7 +50,7 @@ const projectDivTemplate = (name, i) => {
   const closeImg = new Image();
   closeImg.setAttribute('id', 'close');
   closeImg.src = Close;
-  closeImg.dataset.index = i;
+  closeImg.dataset.index = idx;
   projectDiv.appendChild(closeImg);
 
   return projectDiv;
@@ -78,7 +78,7 @@ const navStuff = (() => {
     addProjectForm.reset();
     addProjectForm.style.display = 'none';
     clearProjectDivDisplay();
-    displayProjects();
+    displayProjectNavs();
   });
 })(); 
 

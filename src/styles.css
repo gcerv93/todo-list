@@ -188,13 +188,6 @@ footer {
   align-items: center;
 }
 
-.unchecked {
-  background: url(./images/checkbox.svg);
-  width: 12px;
-  height: 12px;
-  margin-right: 0.5rem;
-}
-
 .form-container {
   display: none;
   justify-content: center;

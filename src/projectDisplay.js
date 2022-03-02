@@ -1,13 +1,16 @@
-// MIGHT NOT NEED ANY OF THIS??? CAN MAYBE USE HOMEPAGE FUNCTIONS TO DISPLAY A PROJECT
-// STILL SHOULD HAVE THIS NAME HOWEVER, CHANGE HOMEPAGE TO SOMETHING ELSE
 import projectManager from "./projectManager";
 import {taskTemplate, taskButtonTemplate} from './homePage.js';
-import taskFactory from './factories.js';
+import {taskFactory} from './factories.js';
 
+// UNFINISHED
 const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
-  console.log(project);
+
+  const task = taskFactory(taskName.value, desc.value);
+  console.log(task);
+  project.addTask(task);
+  console.log(project.getTasks());
 };
 
 const displayProject = (project) => {
@@ -20,6 +23,7 @@ const displayProject = (project) => {
   tasksDiv.setAttribute('id', 'tasks-div');
 
   const taskForm = document.querySelector('.form-container');
+  taskForm.style.display = 'none';
   taskForm.dataset.index = projectManager.getProjectIndex(project);
   projectContent.insertBefore(tasksDiv, taskForm);
 

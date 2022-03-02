@@ -14,15 +14,15 @@ const projectFactory = (name) => {
   const tasks = [];
 
   function addTask(task) {
-    this.tasks.push(task);
+    tasks.push(task);
   };
 
   function getName() {
-    return this.name;
+    return name;
   };
 
   function getTasks() {
-    return this.tasks;
+    return tasks;
   };
 
   return { name, addTask, getName, getTasks };
