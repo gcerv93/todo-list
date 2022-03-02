@@ -20,6 +20,12 @@ const displayTasks = (project) => {
     tasksDiv.appendChild(taskDiv);
 
     const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
+    if (task.finished === true) {
+      checkImg.src = GreenCheck;
+    } else {
+      checkImg.src = Unchecked;
+    }
+
     checkImg.addEventListener('click', (e) => {
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
