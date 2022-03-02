@@ -31,7 +31,7 @@ const projectFactory = (name) => {
   };
 
   function deleteTask(index) {
-    this.tasks.splice(index, 1);
+    tasks.splice(index, 1);
   };
 
   return { name, addTask, getName, getTasks, deleteTask };

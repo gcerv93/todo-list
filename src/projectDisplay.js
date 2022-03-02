@@ -27,7 +27,9 @@ const displayTasks = (project) => {
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
     closeTaskImg.addEventListener('click', (e) => {
-      console.log(index);
+      project.deleteTask(index);
+      clearTasks();
+      displayTasks(project);
     })
   });
 };
