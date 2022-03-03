@@ -134,6 +134,11 @@ header p {
   height: 18px;
 }
 
+.selected {
+  /* temp */
+  background-color: gray;
+}
+
 .content {
   flex: 1;
   /* temp for layout */

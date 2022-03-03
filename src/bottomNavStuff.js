@@ -8,20 +8,30 @@ const clearProjectDivDisplay = () => {
   document.querySelectorAll('.project-div').forEach((element) => element.remove());
 };
 
+const handleSelections = (e) => {
+  const selected = document.querySelectorAll('.selected');
+
+  if (selected) {
+    selected.forEach((element) => element.classList.remove('selected'));
+  };
+
+  e.currentTarget.classList.add('selected');
+};
+
 const displayProjectNavs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
   const form = document.querySelector('.project-form');
   pm.getProjects().forEach((project, index) => {
-    // console.log(project);
     const projectDiv = projectDivTemplate(project.name, index);
     bottomNav.insertBefore(projectDiv, form);
 
-    projectDiv.addEventListener('click', () => {
+    projectDiv.addEventListener('click', (e) => {
       const taskBtn = document.querySelector('.default-task-button');
       const tasksDiv = document.querySelector('#tasks-div');
       if (taskBtn) taskBtn.remove();
       if (tasksDiv) tasksDiv.remove();
       dispProject(project);
+      handleSelections(e);
     });
 
     const closeBtn = document.querySelector(`#close[data-index="${index}"]`);

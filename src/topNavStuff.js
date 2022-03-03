@@ -140,6 +140,16 @@ const importantTasksDisplay = () => {
   topNavDivDisplays(importantTasksProject);
 };
 
+const handleSelections = (e) => {
+  const selected = document.querySelectorAll('.selected');
+
+  if (selected) {
+    selected.forEach((element) => element.classList.remove('selected'));
+  };
+
+  e.currentTarget.classList.add('selected');
+};
+
 const topNavStuff = (() => {
   const allTaskBtn = document.querySelector('.all-tasks');
   const todayTaskBtn = document.querySelector('.today');
@@ -152,6 +162,7 @@ const topNavStuff = (() => {
     const addTaskButton = document.querySelector('.default-task-button');
     if (addTaskButton) addTaskButton.remove();
     allTasksDisplay();
+    handleSelections(e);
   });
 
   todayTaskBtn.addEventListener('click', (e) => {
@@ -161,6 +172,7 @@ const topNavStuff = (() => {
     if (addTaskButton) addTaskButton.remove();
 
     todayTasksDisplay();
+    handleSelections(e);
   });
 
   weekTaskBtn.addEventListener('click', (e) => {
@@ -170,6 +182,7 @@ const topNavStuff = (() => {
     if (addTaskButton) addTaskButton.remove();
 
     thisWeeksDisplay();
+    handleSelections(e);
   });
 
   importantTaskBtn.addEventListener('click', (e) => {
@@ -179,5 +192,6 @@ const topNavStuff = (() => {
     if (addTaskButton) addTaskButton.remove();
 
     importantTasksDisplay();
+    handleSelections(e);
   });
 })();
