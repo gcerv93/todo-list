@@ -24,13 +24,13 @@ const displayTasks = (project) => {
       checkImg.src = Unchecked;
     }
 
-    checkImg.addEventListener('click', (e) => {
+    checkImg.addEventListener('click', () => {
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
     })
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', (e) => {
+    closeTaskImg.addEventListener('click', () => {
       project.deleteTask(index);
       clearTasks();
       displayTasks(project);
@@ -81,6 +81,10 @@ const displayProject = (project) => {
   taskBtn.addEventListener('click', () => {
     taskFormContainer.style.display = 'flex';
   });
+
+  const formDateInput = document.querySelector('#dueDate');
+  const adjustedTime = new Date(new Date().valueOf() - 86400000 + (new Date().getTimezoneOffset() * 60000));
+  formDateInput.valueAsDate = adjustedTime;
 
   const taskForm = document.querySelector('#task-form');
   const formCancel = document.querySelector('#task-form-cancel');
