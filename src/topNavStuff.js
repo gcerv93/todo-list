@@ -4,6 +4,7 @@ import {taskTemplate, taskDescriptionTemplate} from './templates.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 import isSameDay from 'date-fns/isSameDay'
+import isSameWeek from 'date-fns/isSameWeek'
 
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -94,6 +95,22 @@ const todayTasksDisplay = () => {
   topNavDivDisplays(todayTasksProject);
 };
 
+const thisWeeksDisplay = () => {
+  const today = new Date()
+  const thisWeeksProject = projectFactory('This Week');
+
+  pm.getProjects().forEach((project) => {
+    project.getTasks().forEach((task) => {
+      console.log(isSameWeek(today, task.dueDate));
+      if (isSameWeek(today, task.dueDate)) {
+        thisWeeksProject.addTask(task);
+      }
+    })
+  })
+
+  topNavDivDisplays(thisWeeksProject);
+};
+
 const topNavStuff = (() => {
   const allTaskBtn = document.querySelector('.all-tasks');
   const todayTaskBtn = document.querySelector('.today');
@@ -114,10 +131,14 @@ const topNavStuff = (() => {
     if (addTaskButton) addTaskButton.remove();
 
     todayTasksDisplay();
-    console.log(e.target);
   });
 
   weekTaskBtn.addEventListener('click', (e) => {
-    console.log(e.target);
+    const tasksDiv = document.querySelector('#tasks-div');
+    if (tasksDiv) tasksDiv.remove()
+    const addTaskButton = document.querySelector('.default-task-button');
+    if (addTaskButton) addTaskButton.remove();
+
+    thisWeeksDisplay();
   });
 })();
