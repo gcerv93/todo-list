@@ -27,6 +27,7 @@ const taskDescriptionTemplate = (task, idx) => {
 
   const title = document.createElement('p');
   title.textContent = 'Description: '
+  title.style.fontWeight = 'bold';
 
   const desc = document.createElement('p');
   desc.textContent = task.description;

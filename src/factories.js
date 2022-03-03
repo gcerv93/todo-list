@@ -43,7 +43,7 @@ const projectFactory = (name) => {
     return tasks.findIndex((element) => element === task);
   };
 
-  return { name, addTask, getName, getTasks, deleteTask, getTaskIndex };
+  return { name, tasks, addTask, getName, getTasks, deleteTask, getTaskIndex };
 };
 
 export { taskFactory, projectFactory }

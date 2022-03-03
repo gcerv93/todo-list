@@ -21,6 +21,7 @@ const handleSelections = (e) => {
 const displayProjectNavs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
   const form = document.querySelector('.project-form');
+
   pm.getProjects().forEach((project, index) => {
     const projectDiv = projectDivTemplate(project.name, index);
     bottomNav.insertBefore(projectDiv, form);
@@ -92,4 +93,4 @@ const bottomNavStuff = (() => {
   });
 })(); 
 
-export default bottomNavStuff;
+export { displayProjectNavs, bottomNavStuff };

@@ -63,6 +63,11 @@ const displayTasks = (project) => {
   });
 };
 
+const saveStorage = () => {
+  let projects = JSON.stringify(projectManager.getProjects());
+  localStorage.setItem('projects', projects);
+};
+
 // UNFINISHED
 const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
@@ -70,7 +75,7 @@ const handleFormSubmits = () => {
 
   const task = taskFactory(taskName.value, desc.value, parse(dueDate.value, 'yyyy-MM-dd', new Date()), false, false);
   project.addTask(task);
-  console.log(project.getTasks());
+  console.log(task);
 
   const taskFormContainer = document.querySelector('.form-container');
   taskFormContainer.style.display = 'none';
@@ -79,6 +84,7 @@ const handleFormSubmits = () => {
 
   clearTasks();
   displayTasks(project);
+  saveStorage();
 };
 
 const displayProject = (project) => {
