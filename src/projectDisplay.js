@@ -1,5 +1,5 @@
 import projectManager from "./projectManager";
-import {taskTemplate, taskButtonTemplate} from './homePage.js';
+import {taskTemplate, taskButtonTemplate} from './templates.js';
 import {taskFactory} from './factories.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';

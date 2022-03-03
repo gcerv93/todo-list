@@ -1,6 +1,6 @@
 import pm from './projectManager.js';
 import {projectFactory} from './factories.js';
-import {taskTemplate} from './homePage.js';
+import {taskTemplate} from './templates.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 
