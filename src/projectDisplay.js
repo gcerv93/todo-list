@@ -3,6 +3,7 @@ import {taskTemplate, taskButtonTemplate, taskDescriptionTemplate} from './templ
 import {taskFactory} from './factories.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
+import parse from 'date-fns/parse'
 
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -52,9 +53,9 @@ const handleFormSubmits = () => {
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
 
-  const task = taskFactory(taskName.value, desc.value, dueDate.value, false, false);
+  const task = taskFactory(taskName.value, desc.value, parse(dueDate.value, 'yyyy-MM-dd', new Date()), false, false);
   project.addTask(task);
-  // console.log(project.getTasks());
+  console.log(project.getTasks());
 
   const taskFormContainer = document.querySelector('.form-container');
   taskFormContainer.style.display = 'none';
@@ -89,7 +90,7 @@ const displayProject = (project) => {
   taskBtn.addEventListener('click', () => {
     taskFormContainer.style.display = 'flex';
     const formDateInput = document.querySelector('#dueDate');
-    const adjustedTime = new Date(new Date().valueOf() - 86400000 + (new Date().getTimezoneOffset() * 60000));
+    const adjustedTime = new Date();
     formDateInput.valueAsDate = adjustedTime;
   });
 

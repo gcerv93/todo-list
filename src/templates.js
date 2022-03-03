@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+import parse from 'date-fns/parse'
 import Plus from './images/plus-sign-rectangle.svg';
 import Unchecked from './images/unchecked.svg';
 import Close from './images/close-thick.svg';
@@ -60,7 +62,7 @@ const taskTemplate = (task, idx) => {
   if (task.dueDate === '') {
     date.textContent = ''
   } else {
-    date.textContent = `Due: ${task.dueDate}`;
+    date.textContent = `Due: ${format(task.dueDate, 'MM-dd-yyyy')}`;
   }
   rightSide.appendChild(date);
 
