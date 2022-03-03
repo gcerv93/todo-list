@@ -3,6 +3,8 @@ import {taskTemplate, taskButtonTemplate, taskDescriptionTemplate} from './templ
 import {taskFactory} from './factories.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
+import StarOutline from './images/starOutline.svg';
+import StarFilled from './images/starFilled.svg';
 import parse from 'date-fns/parse'
 
 const clearTasks = () => {
@@ -28,6 +30,13 @@ const displayTasks = (project) => {
       checkImg.src = Unchecked;
     }
 
+    const starImg = document.querySelector(`#star-img[data-index="${index}"]`);
+    if (task.important === true) {
+      starImg.src = StarFilled;
+    } else {
+      starImg.src = StarOutline;
+    }
+
     taskDiv.addEventListener('click', () => {
       getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
     })
@@ -36,6 +45,12 @@ const displayTasks = (project) => {
       e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
+    })
+
+    starImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
+      task.changeImportance();
     })
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);

@@ -3,8 +3,10 @@ import {projectFactory} from './factories.js';
 import {taskTemplate, taskDescriptionTemplate} from './templates.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
-import isSameDay from 'date-fns/isSameDay'
-import isSameWeek from 'date-fns/isSameWeek'
+import isSameDay from 'date-fns/isSameDay';
+import isSameWeek from 'date-fns/isSameWeek';
+import StarOutline from './images/starOutline.svg';
+import StarFilled from './images/starFilled.svg';
 
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -29,8 +31,21 @@ const topNavTaskDisplay = (project) => {
       checkImg.src = Unchecked;
     }
 
+    const starImg = document.querySelector(`#star-img[data-index="${index}"]`);
+    if (task.important === true) {
+      starImg.src = StarFilled;
+    } else {
+      starImg.src = StarOutline;
+    }
+
     taskDiv.addEventListener('click', () => {
       getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
+    })
+
+    starImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
+      task.changeImportance();
     })
 
     checkImg.addEventListener('click', (e) => {

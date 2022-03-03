@@ -189,7 +189,8 @@ footer {
   cursor: pointer;
 }
 
-.task-template img:first-child {
+.task-template img:nth-child(2) {
+  margin-left: 5px;
   margin-right: 10px;
 }
 
