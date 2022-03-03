@@ -88,12 +88,10 @@ const displayProject = (project) => {
   projectContent.appendChild(taskBtn);
   taskBtn.addEventListener('click', () => {
     taskFormContainer.style.display = 'flex';
+    const formDateInput = document.querySelector('#dueDate');
+    const adjustedTime = new Date(new Date().valueOf() - 86400000 + (new Date().getTimezoneOffset() * 60000));
+    formDateInput.valueAsDate = adjustedTime;
   });
-
-  // find a way to keep this constant every time even if the form is reset
-  const formDateInput = document.querySelector('#dueDate');
-  const adjustedTime = new Date(new Date().valueOf() - 86400000 + (new Date().getTimezoneOffset() * 60000));
-  formDateInput.valueAsDate = adjustedTime;
 
   const taskForm = document.querySelector('#task-form');
   const formCancel = document.querySelector('#task-form-cancel');
