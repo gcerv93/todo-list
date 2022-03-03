@@ -196,9 +196,14 @@ footer {
   cursor: pointer;
 }
 
+.right-task {
+  display: flex;
+  margin-left: auto;
+}
+
 #close-task {
   display: none;
-  margin-left: auto;
+  margin-left: 5px;
 }
 
 .task-template:hover #close-task {

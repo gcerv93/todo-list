@@ -82,6 +82,7 @@ const displayProject = (project) => {
     taskFormContainer.style.display = 'flex';
   });
 
+  // find a way to keep this constant every time even if the form is reset
   const formDateInput = document.querySelector('#dueDate');
   const adjustedTime = new Date(new Date().valueOf() - 86400000 + (new Date().getTimezoneOffset() * 60000));
   formDateInput.valueAsDate = adjustedTime;

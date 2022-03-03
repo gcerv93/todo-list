@@ -34,11 +34,25 @@ const taskTemplate = (task, idx) => {
   nameText.textContent = task.title;
   templateDiv.appendChild(nameText);
 
+  const rightSide = document.createElement('div');
+  rightSide.classList.add('right-task');
+
+  const date = document.createElement('p');
+  date.setAttribute('id', 'dateDisplay');
+  if (task.dueDate === '') {
+    date.textContent = ''
+  } else {
+    date.textContent = `Due: ${task.dueDate}`;
+  }
+  rightSide.appendChild(date);
+
   const closeImg = new Image();
   closeImg.src = Close;
   closeImg.dataset.index = idx;
   closeImg.setAttribute('id', 'close-task');
-  templateDiv.appendChild(closeImg);
+  rightSide.appendChild(closeImg);
+
+  templateDiv.appendChild(rightSide);
 
   return templateDiv;
 };
