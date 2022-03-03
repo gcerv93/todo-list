@@ -3,6 +3,7 @@ import {projectFactory} from './factories.js';
 import {taskTemplate, taskDescriptionTemplate} from './templates.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
+import isSameDay from 'date-fns/isSameDay'
 
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -78,6 +79,21 @@ const allTasksDisplay = () => {
   topNavDivDisplays(allTasksProject);
 };
 
+const todayTasksDisplay = () => {
+  const today = new Date();
+  const todayTasksProject = projectFactory('Today');
+
+  pm.getProjects().forEach((project) => {
+    project.getTasks().forEach((task) => {
+      if (isSameDay(today, task.dueDate)) {
+        todayTasksProject.addTask(task);
+      }
+    })
+  })
+
+  topNavDivDisplays(todayTasksProject);
+};
+
 const topNavStuff = (() => {
   const allTaskBtn = document.querySelector('.all-tasks');
   const todayTaskBtn = document.querySelector('.today');
@@ -92,6 +108,12 @@ const topNavStuff = (() => {
   });
 
   todayTaskBtn.addEventListener('click', (e) => {
+    const tasksDiv = document.querySelector('#tasks-div');
+    if (tasksDiv) tasksDiv.remove()
+    const addTaskButton = document.querySelector('.default-task-button');
+    if (addTaskButton) addTaskButton.remove();
+
+    todayTasksDisplay();
     console.log(e.target);
   });
 
