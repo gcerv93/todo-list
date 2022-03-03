@@ -195,3 +195,5 @@ const topNavStuff = (() => {
     handleSelections(e);
   });
 })();
+
+export { topNavStuff, allTasksDisplay };
