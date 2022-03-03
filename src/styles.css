@@ -191,6 +191,9 @@ footer {
 
 .task-template img:nth-child(2) {
   margin-left: 5px;
+}
+
+#star-img {
   margin-right: 10px;
 }
 

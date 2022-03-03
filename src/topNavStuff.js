@@ -126,10 +126,25 @@ const thisWeeksDisplay = () => {
   topNavDivDisplays(thisWeeksProject);
 };
 
+const importantTasksDisplay = () => {
+  const importantTasksProject = projectFactory('Important');
+
+  pm.getProjects().forEach((project) => {
+    project.getTasks().forEach((task) => {
+      if (task.important === true) {
+        importantTasksProject.addTask(task);
+      };
+    });
+  });
+
+  topNavDivDisplays(importantTasksProject);
+};
+
 const topNavStuff = (() => {
   const allTaskBtn = document.querySelector('.all-tasks');
   const todayTaskBtn = document.querySelector('.today');
   const weekTaskBtn = document.querySelector('.week');
+  const importantTaskBtn = document.querySelector('.important');
 
   allTaskBtn.addEventListener('click', (e) => {
     const tasksDiv = document.querySelector('#tasks-div');
@@ -155,5 +170,14 @@ const topNavStuff = (() => {
     if (addTaskButton) addTaskButton.remove();
 
     thisWeeksDisplay();
+  });
+
+  importantTaskBtn.addEventListener('click', (e) => {
+    const tasksDiv = document.querySelector('#tasks-div');
+    if (tasksDiv) tasksDiv.remove()
+    const addTaskButton = document.querySelector('.default-task-button');
+    if (addTaskButton) addTaskButton.remove();
+
+    importantTasksDisplay();
   });
 })();
