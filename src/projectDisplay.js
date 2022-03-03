@@ -1,5 +1,5 @@
 import projectManager from "./projectManager";
-import {taskTemplate, taskButtonTemplate} from './templates.js';
+import {taskTemplate, taskButtonTemplate, taskDescriptionTemplate} from './templates.js';
 import {taskFactory} from './factories.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
@@ -17,6 +17,9 @@ const displayTasks = (project) => {
     const taskDiv = taskTemplate(task, index);
     tasksDiv.appendChild(taskDiv);
 
+    const descriptionDiv = taskDescriptionTemplate(task, index);
+    tasksDiv.appendChild(descriptionDiv);
+
     const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
     if (task.finished === true) {
       checkImg.src = GreenCheck;
@@ -24,13 +27,19 @@ const displayTasks = (project) => {
       checkImg.src = Unchecked;
     }
 
-    checkImg.addEventListener('click', () => {
+    taskDiv.addEventListener('click', () => {
+      getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
+    })
+
+    checkImg.addEventListener('click', (e) => {
+      e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
     })
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', () => {
+    closeTaskImg.addEventListener('click', (e) => {
+      e.stopPropagation();
       project.deleteTask(index);
       clearTasks();
       displayTasks(project);
@@ -44,7 +53,6 @@ const handleFormSubmits = () => {
   const project = projectManager.getProject(hiddenInput.value);
 
   const task = taskFactory(taskName.value, desc.value, dueDate.value, false, false);
-  console.log(task);
   project.addTask(task);
   // console.log(project.getTasks());
 

@@ -1,6 +1,6 @@
 import pm from './projectManager.js';
 import {projectFactory} from './factories.js';
-import {taskTemplate} from './templates.js';
+import {taskTemplate, taskDescriptionTemplate} from './templates.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 
@@ -17,6 +17,9 @@ const topNavTaskDisplay = (project) => {
     const taskDiv = taskTemplate(task, index);
     tasksDiv.appendChild(taskDiv);
 
+    const descriptionDiv = taskDescriptionTemplate(task, index);
+    tasksDiv.appendChild(descriptionDiv);
+
     const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
     if (task.finished === true) {
       checkImg.src = GreenCheck;
@@ -24,14 +27,19 @@ const topNavTaskDisplay = (project) => {
       checkImg.src = Unchecked;
     }
 
-    checkImg.addEventListener('click', () => {
+    taskDiv.addEventListener('click', () => {
+      getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
+    })
+
+    checkImg.addEventListener('click', (e) => {
+      e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
     });
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
     closeTaskImg.addEventListener('click', (e) => {
-      console.log(e.target);
+      e.stopPropagation();
       pm.getProjects().forEach((pmProject) => {
         pmProject.getTasks().forEach((projTask) => {
           if (projTask === task) {

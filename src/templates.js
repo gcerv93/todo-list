@@ -18,6 +18,24 @@ const taskButtonTemplate = () => {
   return taskButton;
 };
 
+const taskDescriptionTemplate = (task, idx) => {
+  const taskDescription = document.createElement('div');
+  taskDescription.classList.add('task-description');
+  taskDescription.dataset.index = idx;
+
+  const title = document.createElement('p');
+  title.textContent = 'Description: '
+
+  const desc = document.createElement('p');
+  desc.textContent = task.description;
+  desc.classList.add('description-para');
+
+  taskDescription.appendChild(title);
+  taskDescription.appendChild(desc);
+
+  return taskDescription;
+};
+
 // add a date display here in the future
 const taskTemplate = (task, idx) => {
   const templateDiv = document.createElement('div');
@@ -57,4 +75,4 @@ const taskTemplate = (task, idx) => {
   return templateDiv;
 };
 
-export { taskTemplate, taskButtonTemplate };
+export { taskTemplate, taskButtonTemplate, taskDescriptionTemplate };

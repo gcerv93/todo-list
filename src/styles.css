@@ -186,6 +186,7 @@ footer {
   border-radius: 5px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .task-template img:first-child {
@@ -208,6 +209,22 @@ footer {
 
 .task-template:hover #close-task {
   display: block;
+}
+
+.task-description {
+  display: none;
+  flex-direction: column;
+  height: 50px;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.description-para {
+  margin-top: 5px;
+  margin-left: 15px;
+  word-wrap: break-word;
 }
 
 .form-container {
