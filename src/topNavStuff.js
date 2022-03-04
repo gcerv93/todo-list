@@ -23,7 +23,7 @@ const topNavDisplayHandler = (project) => {
 
 // sets up the all tasks project using project manager
 const allTasksDisplay = () => {
-  const allTasksProject = projectFactory('allTasks');
+  const allTasksProject = projectFactory('All Tasks');
 
   projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => allTasksProject.addTask(task));

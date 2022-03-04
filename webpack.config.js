@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'TodoOrNot',
+      title: 'TodoOrNotTodo',
       template: './src/index.html'
     }),
     new MiniCssExtractPlugin( { filename: 'styles.css' }),
