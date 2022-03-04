@@ -1,6 +1,6 @@
 import { projectFactory, projectManager } from './objStuff.js';
 import { taskTemplate, taskDescriptionTemplate } from './divTemplates.js';
-import { clearTasks, handleSelections } from './helpers.js';
+import { clearTasks, handleSelections, removeNotNeeded, saveStorage } from './helpers.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 import isSameDay from 'date-fns/isSameDay';
@@ -39,12 +39,14 @@ const topNavTaskDisplay = (project) => {
       e.stopPropagation();
       starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
       task.changeImportance();
+      saveStorage();
     })
 
     checkImg.addEventListener('click', (e) => {
       e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
+      saveStorage();
     });
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
@@ -56,6 +58,7 @@ const topNavTaskDisplay = (project) => {
             pmProject.deleteTask(pmProject.getTaskIndex(projTask));
             clearTasks();
             project.deleteTask(index);
+            saveStorage();
             topNavTaskDisplay(project);
           };
         });
@@ -139,39 +142,28 @@ const topNavStuff = (() => {
   const importantTaskBtn = document.querySelector('.important');
 
   allTaskBtn.addEventListener('click', (e) => {
-    const tasksDiv = document.querySelector('#tasks-div');
-    if (tasksDiv) tasksDiv.remove()
-    const addTaskButton = document.querySelector('.default-task-button');
-    if (addTaskButton) addTaskButton.remove();
+    removeNotNeeded();
+
     allTasksDisplay();
     handleSelections(e);
   });
 
   todayTaskBtn.addEventListener('click', (e) => {
-    const tasksDiv = document.querySelector('#tasks-div');
-    if (tasksDiv) tasksDiv.remove()
-    const addTaskButton = document.querySelector('.default-task-button');
-    if (addTaskButton) addTaskButton.remove();
+    removeNotNeeded();
 
     todayTasksDisplay();
     handleSelections(e);
   });
 
   weekTaskBtn.addEventListener('click', (e) => {
-    const tasksDiv = document.querySelector('#tasks-div');
-    if (tasksDiv) tasksDiv.remove()
-    const addTaskButton = document.querySelector('.default-task-button');
-    if (addTaskButton) addTaskButton.remove();
+    removeNotNeeded();
 
     thisWeeksDisplay();
     handleSelections(e);
   });
 
   importantTaskBtn.addEventListener('click', (e) => {
-    const tasksDiv = document.querySelector('#tasks-div');
-    if (tasksDiv) tasksDiv.remove()
-    const addTaskButton = document.querySelector('.default-task-button');
-    if (addTaskButton) addTaskButton.remove();
+    removeNotNeeded();
 
     importantTasksDisplay();
     handleSelections(e);

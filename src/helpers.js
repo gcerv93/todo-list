@@ -2,6 +2,14 @@ import { taskFactory, projectFactory, projectManager } from './objStuff.js';
 import { displayBottomNavDivs } from './bottomNavStuff.js';
 import { allTasksDisplay } from './topNavStuff';
 
+const removeNotNeeded = () => {
+  const tasksDiv = document.querySelector('#tasks-div');
+  if (tasksDiv) tasksDiv.remove()
+
+  const addTaskButton = document.querySelector('.default-task-button');
+  if (addTaskButton) addTaskButton.remove();
+};
+
 const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
   while (tasksDiv.firstChild) {
@@ -47,4 +55,4 @@ const load = () => {
   allTasksDisplay();
 };
 
-export { clearTasks, saveStorage, handleSelections, load };
+export { clearTasks, saveStorage, handleSelections, load, removeNotNeeded };

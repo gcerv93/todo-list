@@ -1,5 +1,5 @@
 import { taskTemplate, taskButtonTemplate, taskDescriptionTemplate } from './divTemplates.js';
-import { clearTasks, saveStorage, handleSelections } from './helpers.js';
+import { clearTasks, saveStorage, handleSelections, removeNotNeeded } from './helpers.js';
 import { taskFactory, projectFactory, projectManager } from './objStuff.js';
 import Project from './images/project.svg';
 import Close from './images/close-thick.svg';
@@ -58,18 +58,21 @@ const displayBottomNavTasks = (project) => {
       e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
+      saveStorage();
     })
 
     starImg.addEventListener('click', (e) => {
       e.stopPropagation();
       starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
       task.changeImportance();
+      saveStorage();
     })
 
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
     closeTaskImg.addEventListener('click', (e) => {
       e.stopPropagation();
       project.deleteTask(index);
+      saveStorage();
       clearTasks();
       displayBottomNavTasks(project);
     })
@@ -129,10 +132,7 @@ const displayBottomNavDivs = () => {
     bottomNav.insertBefore(projectDiv, form);
 
     projectDiv.addEventListener('click', (e) => {
-      const taskBtn = document.querySelector('.default-task-button');
-      const tasksDiv = document.querySelector('#tasks-div');
-      if (taskBtn) taskBtn.remove();
-      if (tasksDiv) tasksDiv.remove();
+      removeNotNeeded();
       displayBottomNavProjects(project);
       handleSelections(e);
     });
@@ -141,6 +141,7 @@ const displayBottomNavDivs = () => {
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       projectManager.deleteProject(index);
+      saveStorage();
       clearProjectDivDisplay();
       displayBottomNavDivs();
     });
@@ -188,6 +189,7 @@ const bottomNavStuff = (() => {
   formSubmit.addEventListener('click', () => {
     const project = projectFactory(projectName.value);
     projectManager.addProject(project);
+    saveStorage();
     addProjectForm.reset();
     addProjectForm.style.display = 'none';
     clearProjectDivDisplay();
