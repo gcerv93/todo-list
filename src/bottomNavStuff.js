@@ -1,84 +1,37 @@
-import { taskTemplate, taskButtonTemplate, taskDescriptionTemplate } from './divTemplates.js';
-import { clearTasks, saveStorage, handleSelections, removeNotNeeded } from './helpers.js';
+import { taskButtonTemplate, bottomNavDivTemplate } from './divTemplates.js';
+import { clearTasks, clearBottomNavDivDisplay, saveStorage, handleSelections, removeNotNeeded } from './helpers.js';
 import { taskFactory, projectFactory, projectManager } from './objStuff.js';
-import Project from './images/project.svg';
-import Close from './images/close-thick.svg';
-import GreenCheck from './images/green-checkbox.svg';
-import Unchecked from './images/unchecked.svg';
-import StarOutline from './images/starOutline.svg';
-import StarFilled from './images/starFilled.svg';
+import taskDisplay from './taskDisplay.js';
+
 import parse from 'date-fns/parse'
 
+// ran whenever a task form is submitted. Creates the task object with the form values
+// Is there value in refactoring this? I need all this to be done on form submits
+// and refactoring would still mean that a small function that doesn't get used
+// anywhere else gets called here. Will keep for now
 const handleTaskFormSubmits = () => {
+  // every form on a project page has a hidden input holding the project name
+  // might be a better way to do this? will cause problems whenever 2 projects have the same name
   const hiddenInput = document.querySelector('#project');
   const project = projectManager.getProject(hiddenInput.value);
 
   const task = taskFactory(taskName.value, desc.value, parse(dueDate.value, 'yyyy-MM-dd', new Date()), false, false);
   project.addTask(task);
-  console.log(task);
 
+  // hide the form and reset its values
   const taskFormContainer = document.querySelector('.form-container');
   taskFormContainer.style.display = 'none';
   const taskForm = document.querySelector('#task-form');
   taskForm.reset();
 
   clearTasks();
-  displayBottomNavTasks(project);
+  taskDisplay(project, true);
   saveStorage();
 };
 
-const displayBottomNavTasks = (project) => {
-  const tasksDiv = document.querySelector('#tasks-div');
-  project.getTasks().forEach((task, index) => {
-    const taskDiv = taskTemplate(task, index);
-    tasksDiv.appendChild(taskDiv);
 
-    const descriptionDiv = taskDescriptionTemplate(task, index);
-    tasksDiv.appendChild(descriptionDiv);
-
-    const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
-    if (task.finished === true) {
-      checkImg.src = GreenCheck;
-    } else {
-      checkImg.src = Unchecked;
-    }
-
-    const starImg = document.querySelector(`#star-img[data-index="${index}"]`);
-    if (task.important === true) {
-      starImg.src = StarFilled;
-    } else {
-      starImg.src = StarOutline;
-    }
-
-    taskDiv.addEventListener('click', () => {
-      getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
-    })
-
-    checkImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
-      task.changeFinished();
-      saveStorage();
-    })
-
-    starImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
-      task.changeImportance();
-      saveStorage();
-    })
-
-    const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      project.deleteTask(index);
-      saveStorage();
-      clearTasks();
-      displayBottomNavTasks(project);
-    })
-  });
-};
-
+// this adds the task button and form listeners to the project pages
+// different from top nav pages which have no add task button
 const displayBottomNavProjects = (project) => {
   const projectContent = document.querySelector('.task-content');
 
@@ -93,7 +46,7 @@ const displayBottomNavProjects = (project) => {
   taskFormContainer.dataset.index = projectManager.getProjectIndex(project);
   projectContent.insertBefore(tasksDiv, taskFormContainer);
 
-  displayBottomNavTasks(project);
+  taskDisplay(project, true);
 
   const hiddenInput = document.querySelector('#project');
   hiddenInput.value = project.getName();
@@ -119,16 +72,14 @@ const displayBottomNavProjects = (project) => {
   formSubmit.addEventListener('click', handleTaskFormSubmits);
 };
 
-const clearProjectDivDisplay = () => {
-  document.querySelectorAll('.project-div').forEach((element) => element.remove());
-};
 
+// displays the bottom nav divs to the page
 const displayBottomNavDivs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
   const form = document.querySelector('.project-form');
 
   projectManager.getProjects().forEach((project, index) => {
-    const projectDiv = projectDivTemplate(project.name, index);
+    const projectDiv = bottomNavDivTemplate(project.name, index);
     bottomNav.insertBefore(projectDiv, form);
 
     projectDiv.addEventListener('click', (e) => {
@@ -142,33 +93,12 @@ const displayBottomNavDivs = () => {
       e.stopPropagation();
       projectManager.deleteProject(index);
       saveStorage();
-      clearProjectDivDisplay();
+      clearBottomNavDivDisplay();
       displayBottomNavDivs();
     });
   });
 };
 
-const projectDivTemplate = (name, idx) => {
-  const projectDiv = document.createElement('div');
-  projectDiv.classList.add('project-div');
-  projectDiv.dataset.index = idx;
-
-  const projectImg = new Image();
-  projectImg.src = Project;
-  projectDiv.appendChild(projectImg);
-
-  const nameText = document.createElement('p');
-  nameText.textContent = name;
-  projectDiv.appendChild(nameText);
-
-  const closeImg = new Image();
-  closeImg.setAttribute('id', 'close');
-  closeImg.src = Close;
-  closeImg.dataset.index = idx;
-  projectDiv.appendChild(closeImg);
-
-  return projectDiv;
-};
 
 const bottomNavStuff = (() => {
   const addProjectForm = document.querySelector('.project-form');
@@ -192,7 +122,7 @@ const bottomNavStuff = (() => {
     saveStorage();
     addProjectForm.reset();
     addProjectForm.style.display = 'none';
-    clearProjectDivDisplay();
+    clearBottomNavDivDisplay();
     displayBottomNavDivs();
   });
 })(); 

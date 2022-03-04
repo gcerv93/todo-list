@@ -1,3 +1,6 @@
+
+// module for the object factories(tasks, projects) and the project manager
+
 const taskFactory = (title, description, dueDate, important, finished) => {
   function changeFinished() {
     this.finished === true ? this.finished = false : this.finished = true;
@@ -18,34 +21,52 @@ const taskFactory = (title, description, dueDate, important, finished) => {
   };
 };
 
+
 const projectFactory = (name) => {
   name: name;
-  
+
   const tasks = [];
 
   function addTask(task) {
     tasks.push(task);
   };
 
+
   function getName() {
     return name;
   };
+
 
   function getTasks() {
     return tasks;
   };
 
+
   function deleteTask(index) {
     tasks.splice(index, 1);
   };
+
 
   function getTaskIndex(task) {
     return tasks.findIndex((element) => element === task);
   };
 
-  return { name, tasks, addTask, getName, getTasks, deleteTask, getTaskIndex };
+  // if i dont return tasks, the local storage wont save them???
+  return {
+    name,
+    tasks,
+    addTask,
+    getName,
+    getTasks,
+    deleteTask,
+    getTaskIndex
+  };
 };
 
+
+// this really helps to keep projects and tasks in one place for the all tasks,
+// today, and this week displays. as well as for having a centralized object that
+// contains all data to save to local storage.
 const projectManager = (() => {
   const projects = [];
 

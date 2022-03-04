@@ -1,72 +1,11 @@
 import { projectFactory, projectManager } from './objStuff.js';
-import { taskTemplate, taskDescriptionTemplate } from './divTemplates.js';
-import { clearTasks, handleSelections, removeNotNeeded, saveStorage } from './helpers.js';
-import GreenCheck from './images/green-checkbox.svg';
-import Unchecked from './images/unchecked.svg';
+import { handleSelections, removeNotNeeded } from './helpers.js';
+import taskDisplay from './taskDisplay.js';
 import isSameDay from 'date-fns/isSameDay';
 import isSameWeek from 'date-fns/isSameWeek';
-import StarOutline from './images/starOutline.svg';
-import StarFilled from './images/starFilled.svg';
 
-const topNavTaskDisplay = (project) => {
-  const tasksDiv = document.querySelector('#tasks-div');
-  project.getTasks().forEach((task, index) => {
-    const taskDiv = taskTemplate(task, index);
-    tasksDiv.appendChild(taskDiv);
 
-    const descriptionDiv = taskDescriptionTemplate(task, index);
-    tasksDiv.appendChild(descriptionDiv);
-
-    const checkImg = document.querySelector(`#check-img[data-index="${index}"]`);
-    if (task.finished === true) {
-      checkImg.src = GreenCheck;
-    } else {
-      checkImg.src = Unchecked;
-    }
-
-    const starImg = document.querySelector(`#star-img[data-index="${index}"]`);
-    if (task.important === true) {
-      starImg.src = StarFilled;
-    } else {
-      starImg.src = StarOutline;
-    }
-
-    taskDiv.addEventListener('click', () => {
-      getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
-    })
-
-    starImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
-      task.changeImportance();
-      saveStorage();
-    })
-
-    checkImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
-      task.changeFinished();
-      saveStorage();
-    });
-
-    const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      projectManager.getProjects().forEach((pmProject) => {
-        pmProject.getTasks().forEach((projTask) => {
-          if (projTask === task) {
-            pmProject.deleteTask(pmProject.getTaskIndex(projTask));
-            clearTasks();
-            project.deleteTask(index);
-            saveStorage();
-            topNavTaskDisplay(project);
-          };
-        });
-      });
-    });
-  });
-};
-
+// sets up the page to prepare for displaying tasks
 const topNavDisplayHandler = (project) => {
   const content = document.querySelector('.task-content');
 
@@ -78,9 +17,11 @@ const topNavDisplayHandler = (project) => {
   const formContainer = document.querySelector('.form-container');
   content.insertBefore(tasksDiv, formContainer);
 
-  topNavTaskDisplay(project);
+  taskDisplay(project);
 };
 
+
+// sets up the all tasks project using project manager
 const allTasksDisplay = () => {
   const allTasksProject = projectFactory('allTasks');
 
@@ -91,6 +32,8 @@ const allTasksDisplay = () => {
   topNavDisplayHandler(allTasksProject);
 };
 
+
+// sets up the today tasks project using project manager
 const todayTasksDisplay = () => {
   const today = new Date();
   const todayTasksProject = projectFactory('Today');
@@ -106,6 +49,8 @@ const todayTasksDisplay = () => {
   topNavDisplayHandler(todayTasksProject);
 };
 
+
+// sets up this weeks tasks project
 const thisWeeksDisplay = () => {
   const today = new Date()
   const thisWeeksProject = projectFactory('This Week');
@@ -121,6 +66,8 @@ const thisWeeksDisplay = () => {
   topNavDisplayHandler(thisWeeksProject);
 };
 
+
+// sets up the important tasks project
 const importantTasksDisplay = () => {
   const importantTasksProject = projectFactory('Important');
 
@@ -135,6 +82,8 @@ const importantTasksDisplay = () => {
   topNavDisplayHandler(importantTasksProject);
 };
 
+
+// event listeners for each topNav div
 const topNavStuff = (() => {
   const allTaskBtn = document.querySelector('.all-tasks');
   const todayTaskBtn = document.querySelector('.today');
