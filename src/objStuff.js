@@ -2,11 +2,13 @@
 
 const taskFactory = (title, description, dueDate, important, finished) => {
   function changeFinished() {
-    this.finished === true ? this.finished = false : this.finished = true;
+    this.finished === true ? (this.finished = false) : (this.finished = true);
   }
 
   function changeImportance() {
-    this.important === true ? this.important = false : this.important = true;
+    this.important === true
+      ? (this.important = false)
+      : (this.important = true);
   }
 
   return {

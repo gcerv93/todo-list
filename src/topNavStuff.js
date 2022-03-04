@@ -1,19 +1,19 @@
-import isSameDay from 'date-fns/isSameDay';
-import isSameWeek from 'date-fns/isSameWeek';
-import { projectFactory, projectManager } from './objStuff';
-import { handleSelections, removeNotNeeded } from './helpers';
-import taskDisplay from './taskDisplay';
+import isSameDay from "date-fns/isSameDay";
+import isSameWeek from "date-fns/isSameWeek";
+import { projectFactory, projectManager } from "./objStuff";
+import { handleSelections, removeNotNeeded } from "./helpers";
+import taskDisplay from "./taskDisplay";
 
 // sets up the page to prepare for displaying tasks
 const topNavDisplayHandler = (project) => {
-  const content = document.querySelector('.task-content');
+  const content = document.querySelector(".task-content");
 
-  document.querySelector('.task-heading').textContent = project.name;
+  document.querySelector(".task-heading").textContent = project.name;
 
-  const tasksDiv = document.createElement('div');
-  tasksDiv.setAttribute('id', 'tasks-div');
+  const tasksDiv = document.createElement("div");
+  tasksDiv.setAttribute("id", "tasks-div");
 
-  const formContainer = document.querySelector('.form-container');
+  const formContainer = document.querySelector(".form-container");
   content.insertBefore(tasksDiv, formContainer);
 
   taskDisplay(project);
@@ -21,7 +21,7 @@ const topNavDisplayHandler = (project) => {
 
 // sets up the all tasks project using project manager
 const allTasksDisplay = () => {
-  const allTasksProject = projectFactory('All Tasks');
+  const allTasksProject = projectFactory("All Tasks");
 
   projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => allTasksProject.addTask(task));
@@ -33,7 +33,7 @@ const allTasksDisplay = () => {
 // sets up the today tasks project using project manager
 const todayTasksDisplay = () => {
   const today = new Date();
-  const todayTasksProject = projectFactory('Today');
+  const todayTasksProject = projectFactory("Today");
 
   projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
@@ -49,7 +49,7 @@ const todayTasksDisplay = () => {
 // sets up this weeks tasks project
 const thisWeeksDisplay = () => {
   const today = new Date();
-  const thisWeeksProject = projectFactory('This Week');
+  const thisWeeksProject = projectFactory("This Week");
 
   projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
@@ -64,7 +64,7 @@ const thisWeeksDisplay = () => {
 
 // sets up the important tasks project
 const importantTasksDisplay = () => {
-  const importantTasksProject = projectFactory('Important');
+  const importantTasksProject = projectFactory("Important");
 
   projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
@@ -79,33 +79,33 @@ const importantTasksDisplay = () => {
 
 // event listeners for each topNav div
 const topNavStuff = (() => {
-  const allTaskBtn = document.querySelector('.all-tasks');
-  const todayTaskBtn = document.querySelector('.today');
-  const weekTaskBtn = document.querySelector('.week');
-  const importantTaskBtn = document.querySelector('.important');
+  const allTaskBtn = document.querySelector(".all-tasks");
+  const todayTaskBtn = document.querySelector(".today");
+  const weekTaskBtn = document.querySelector(".week");
+  const importantTaskBtn = document.querySelector(".important");
 
-  allTaskBtn.addEventListener('click', (e) => {
+  allTaskBtn.addEventListener("click", (e) => {
     removeNotNeeded();
 
     allTasksDisplay();
     handleSelections(e);
   });
 
-  todayTaskBtn.addEventListener('click', (e) => {
+  todayTaskBtn.addEventListener("click", (e) => {
     removeNotNeeded();
 
     todayTasksDisplay();
     handleSelections(e);
   });
 
-  weekTaskBtn.addEventListener('click', (e) => {
+  weekTaskBtn.addEventListener("click", (e) => {
     removeNotNeeded();
 
     thisWeeksDisplay();
     handleSelections(e);
   });
 
-  importantTaskBtn.addEventListener('click', (e) => {
+  importantTaskBtn.addEventListener("click", (e) => {
     removeNotNeeded();
 
     importantTasksDisplay();
