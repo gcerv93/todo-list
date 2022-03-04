@@ -1,8 +1,6 @@
 import { format } from 'date-fns';
 import Plus from './images/plus-sign-rectangle.svg';
-import Unchecked from './images/unchecked.svg';
 import Close from './images/close-thick.svg';
-import StarOutline from './images/starOutline.svg';
 
 // task button for the main page, will this be usable for the project screens?
 const taskButtonTemplate = () => {
@@ -46,13 +44,11 @@ const taskTemplate = (task, idx) => {
   templateDiv.dataset.index = idx;
 
   const uncheckedImg = new Image();
-  uncheckedImg.src = Unchecked;
   uncheckedImg.dataset.index = idx;
   uncheckedImg.setAttribute('id', 'check-img');
   templateDiv.appendChild(uncheckedImg);
 
   const starImg = new Image();
-  starImg.src = StarOutline;
   starImg.dataset.index = idx;
   starImg.setAttribute('id', 'star-img');
   templateDiv.appendChild(starImg);

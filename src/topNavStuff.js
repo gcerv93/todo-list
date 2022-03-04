@@ -1,19 +1,12 @@
-import pm from './projectManager.js';
-import {projectFactory} from './factories.js';
-import {taskTemplate, taskDescriptionTemplate} from './templates.js';
+import { projectFactory, projectManager } from './objStuff.js';
+import { taskTemplate, taskDescriptionTemplate } from './divTemplates.js';
+import { clearTasks, handleSelections } from './helpers.js';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 import isSameDay from 'date-fns/isSameDay';
 import isSameWeek from 'date-fns/isSameWeek';
 import StarOutline from './images/starOutline.svg';
 import StarFilled from './images/starFilled.svg';
-
-const clearTasks = () => {
-  const tasksDiv = document.querySelector('#tasks-div');
-  while (tasksDiv.firstChild) {
-    tasksDiv.removeChild(tasksDiv.firstChild);
-  };
-};
 
 const topNavTaskDisplay = (project) => {
   const tasksDiv = document.querySelector('#tasks-div');
@@ -57,7 +50,7 @@ const topNavTaskDisplay = (project) => {
     const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
     closeTaskImg.addEventListener('click', (e) => {
       e.stopPropagation();
-      pm.getProjects().forEach((pmProject) => {
+      projectManager.getProjects().forEach((pmProject) => {
         pmProject.getTasks().forEach((projTask) => {
           if (projTask === task) {
             pmProject.deleteTask(pmProject.getTaskIndex(projTask));
@@ -71,7 +64,7 @@ const topNavTaskDisplay = (project) => {
   });
 };
 
-const topNavDivDisplays = (project) => {
+const topNavDisplayHandler = (project) => {
   const content = document.querySelector('.task-content');
 
   document.querySelector('.task-heading').textContent = project.name;
@@ -88,18 +81,18 @@ const topNavDivDisplays = (project) => {
 const allTasksDisplay = () => {
   const allTasksProject = projectFactory('allTasks');
 
-  pm.getProjects().forEach((project) => {
+  projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => allTasksProject.addTask(task));
   });
 
-  topNavDivDisplays(allTasksProject);
+  topNavDisplayHandler(allTasksProject);
 };
 
 const todayTasksDisplay = () => {
   const today = new Date();
   const todayTasksProject = projectFactory('Today');
 
-  pm.getProjects().forEach((project) => {
+  projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
       if (isSameDay(today, task.dueDate)) {
         todayTasksProject.addTask(task);
@@ -107,29 +100,28 @@ const todayTasksDisplay = () => {
     })
   })
 
-  topNavDivDisplays(todayTasksProject);
+  topNavDisplayHandler(todayTasksProject);
 };
 
 const thisWeeksDisplay = () => {
   const today = new Date()
   const thisWeeksProject = projectFactory('This Week');
 
-  pm.getProjects().forEach((project) => {
+  projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
-      console.log(isSameWeek(today, task.dueDate));
       if (isSameWeek(today, task.dueDate)) {
         thisWeeksProject.addTask(task);
       }
     })
   })
 
-  topNavDivDisplays(thisWeeksProject);
+  topNavDisplayHandler(thisWeeksProject);
 };
 
 const importantTasksDisplay = () => {
   const importantTasksProject = projectFactory('Important');
 
-  pm.getProjects().forEach((project) => {
+  projectManager.getProjects().forEach((project) => {
     project.getTasks().forEach((task) => {
       if (task.important === true) {
         importantTasksProject.addTask(task);
@@ -137,17 +129,7 @@ const importantTasksDisplay = () => {
     });
   });
 
-  topNavDivDisplays(importantTasksProject);
-};
-
-const handleSelections = (e) => {
-  const selected = document.querySelectorAll('.selected');
-
-  if (selected) {
-    selected.forEach((element) => element.classList.remove('selected'));
-  };
-
-  e.currentTarget.classList.add('selected');
+  topNavDisplayHandler(importantTasksProject);
 };
 
 const topNavStuff = (() => {
