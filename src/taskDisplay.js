@@ -1,6 +1,6 @@
-import { projectManager } from './objStuff.js';
-import { taskTemplate, taskDescriptionTemplate } from './divTemplates.js';
-import { clearTasks, saveStorage } from './helpers.js';
+import { projectManager } from './objStuff';
+import { taskTemplate, taskDescriptionTemplate } from './divTemplates';
+import { clearTasks, saveStorage } from './helpers';
 import GreenCheck from './images/green-checkbox.svg';
 import Unchecked from './images/unchecked.svg';
 import StarOutline from './images/starOutline.svg';
@@ -10,37 +10,35 @@ import StarFilled from './images/starFilled.svg';
 // attaches a different listener than the top display
 const bottomCloseBtnListener = (project, index) => {
   const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      project.deleteTask(index);
-      saveStorage();
-      clearTasks();
-      taskDisplay(project, true);
-    });
+  closeTaskImg.addEventListener('click', (e) => {
+    e.stopPropagation();
+    project.deleteTask(index);
+    saveStorage();
+    clearTasks();
+    taskDisplay(project, true);
+  });
 };
-
 
 // since the top nav displays are in seperate projects, I have to find the tasks
 // in their original projects whenever the task is deleted. Therefore i have 2
 // seperate functions to handle these 2 scenarios
 const topCloseBtnListener = (project, task, index) => {
   const closeTaskImg = document.querySelector(`#close-task[data-index="${index}"]`);
-    closeTaskImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      projectManager.getProjects().forEach((pmProject) => {
-        pmProject.getTasks().forEach((projTask) => {
-          if (projTask === task) {
-            pmProject.deleteTask(pmProject.getTaskIndex(projTask));
-            clearTasks();
-            project.deleteTask(index);
-            saveStorage();
-            taskDisplay(project);
-          };
-        });
+  closeTaskImg.addEventListener('click', (e) => {
+    e.stopPropagation();
+    projectManager.getProjects().forEach((pmProject) => {
+      pmProject.getTasks().forEach((projTask) => {
+        if (projTask === task) {
+          pmProject.deleteTask(pmProject.getTaskIndex(projTask));
+          clearTasks();
+          project.deleteTask(index);
+          saveStorage();
+          taskDisplay(project);
+        }
       });
     });
+  });
 };
-
 
 // handles tasks displays for both nop nav buttons and bottom nav buttons
 // each task with their own listener for all 3 of their buttons
@@ -69,21 +67,21 @@ const taskDisplay = (project, bottom = false) => {
 
     taskDiv.addEventListener('click', () => {
       getComputedStyle(descriptionDiv).display === 'none' ? descriptionDiv.style.display = 'flex' : descriptionDiv.style.display = 'none';
-    })
+    });
 
     checkImg.addEventListener('click', (e) => {
       e.stopPropagation();
       checkImg.src === GreenCheck ? checkImg.src = Unchecked : checkImg.src = GreenCheck;
       task.changeFinished();
       saveStorage();
-    })
+    });
 
     starImg.addEventListener('click', (e) => {
       e.stopPropagation();
       starImg.src === StarFilled ? starImg.src = StarOutline : starImg.src = StarFilled;
       task.changeImportance();
       saveStorage();
-    })
+    });
 
     if (bottom) {
       bottomCloseBtnListener(project, index);
@@ -92,6 +90,5 @@ const taskDisplay = (project, bottom = false) => {
     }
   });
 };
-
 
 export default taskDisplay;

@@ -1,9 +1,10 @@
-import { taskButtonTemplate, bottomNavDivTemplate } from './divTemplates.js';
-import { clearTasks, clearBottomNavDivDisplay, saveStorage, handleSelections, removeNotNeeded } from './helpers.js';
-import { taskFactory, projectFactory, projectManager } from './objStuff.js';
-import taskDisplay from './taskDisplay.js';
-
-import parse from 'date-fns/parse'
+import parse from 'date-fns/parse';
+import { taskButtonTemplate, bottomNavDivTemplate } from './divTemplates';
+import {
+  clearTasks, clearBottomNavDivDisplay, saveStorage, handleSelections, removeNotNeeded,
+} from './helpers';
+import { taskFactory, projectFactory, projectManager } from './objStuff';
+import taskDisplay from './taskDisplay';
 
 // ran whenever a task form is submitted. Creates the task object with the form values
 // Is there value in refactoring this? I need all this to be done on form submits
@@ -28,7 +29,6 @@ const handleTaskFormSubmits = () => {
   taskDisplay(project, true);
   saveStorage();
 };
-
 
 // this adds the task button and form listeners to the project pages
 // different from top nav pages which have no add task button
@@ -72,7 +72,6 @@ const displayBottomNavProjects = (project) => {
   formSubmit.addEventListener('click', handleTaskFormSubmits);
 };
 
-
 // displays the bottom nav divs to the page
 const displayBottomNavDivs = () => {
   const bottomNav = document.querySelector('.bottom-side-nav');
@@ -99,7 +98,6 @@ const displayBottomNavDivs = () => {
   });
 };
 
-
 const bottomNavStuff = (() => {
   const addProjectForm = document.querySelector('.project-form');
   const addProjectBtn = document.querySelector('.add-project-btn');
@@ -113,7 +111,7 @@ const bottomNavStuff = (() => {
   formCancel.addEventListener('click', () => {
     addProjectForm.style.display = 'none';
     addProjectForm.reset();
-  })
+  });
 
   const formSubmit = document.querySelector('.project-submit-btn');
   formSubmit.addEventListener('click', () => {
@@ -125,6 +123,6 @@ const bottomNavStuff = (() => {
     clearBottomNavDivDisplay();
     displayBottomNavDivs();
   });
-})(); 
+})();
 
 export { displayBottomNavDivs, bottomNavStuff };

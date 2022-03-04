@@ -1,5 +1,5 @@
-import { taskFactory, projectFactory, projectManager } from './objStuff.js';
-import { displayBottomNavDivs } from './bottomNavStuff.js';
+import { taskFactory, projectFactory, projectManager } from './objStuff';
+import { displayBottomNavDivs } from './bottomNavStuff';
 import { allTasksDisplay } from './topNavStuff';
 
 // a new tasks-div and add task button is created every time a new project is rendered, this function
@@ -7,12 +7,11 @@ import { allTasksDisplay } from './topNavStuff';
 // rendered
 const removeNotNeeded = () => {
   const tasksDiv = document.querySelector('#tasks-div');
-  if (tasksDiv) tasksDiv.remove()
+  if (tasksDiv) tasksDiv.remove();
 
   const addTaskButton = document.querySelector('.default-task-button');
   if (addTaskButton) addTaskButton.remove();
 };
-
 
 // when adding a new task to a project, the entire tasks div is filled in again
 // run this after every new task to clear the tasks div
@@ -20,16 +19,14 @@ const clearTasks = () => {
   const tasksDiv = document.querySelector('#tasks-div');
   while (tasksDiv.firstChild) {
     tasksDiv.removeChild(tasksDiv.firstChild);
-  };
+  }
 };
-
 
 // clear the bottom nav of project name divs, ran whenever a new project is created
 // and rendered
 const clearBottomNavDivDisplay = () => {
   document.querySelectorAll('.project-div').forEach((element) => element.remove());
 };
-
 
 // ran whenever a new nav div is clicked. this find all classes that currently
 // have a selected class and removes it, so that only the clicked nav ends up
@@ -39,23 +36,21 @@ const handleSelections = (e) => {
 
   if (selected) {
     selected.forEach((element) => element.classList.remove('selected'));
-  };
+  }
 
   e.currentTarget.classList.add('selected');
 };
 
-
 const saveStorage = () => {
-  let projects = JSON.stringify(projectManager.getProjects());
+  const projects = JSON.stringify(projectManager.getProjects());
   localStorage.setItem('projects', projects);
 };
-
 
 // projects in local storage are first created using the projectFactory, then each
 // of their tasks are created, then finally they are added to the project manager and
 // their nav divs rendered as well as the all tasks homepage
 const load = () => {
-  if(!localStorage.getItem('projects')) {
+  if (!localStorage.getItem('projects')) {
     allTasksDisplay();
   } else {
     let projects = localStorage.getItem('projects');
@@ -68,11 +63,11 @@ const load = () => {
       project.tasks.forEach((task) => {
         const tsk = taskFactory(task.title, task.description, new Date(task.dueDate), task.important, task.finished);
         proj.addTask(tsk);
-      })
+      });
 
       projectManager.addProject(proj);
     });
-  };
+  }
   displayBottomNavDivs();
   allTasksDisplay();
 };
@@ -83,5 +78,5 @@ export {
   handleSelections,
   load,
   removeNotNeeded,
-  clearBottomNavDivDisplay
+  clearBottomNavDivDisplay,
 };

@@ -1,9 +1,8 @@
-import { projectFactory, projectManager } from './objStuff.js';
-import { handleSelections, removeNotNeeded } from './helpers.js';
-import taskDisplay from './taskDisplay.js';
 import isSameDay from 'date-fns/isSameDay';
 import isSameWeek from 'date-fns/isSameWeek';
-
+import { projectFactory, projectManager } from './objStuff';
+import { handleSelections, removeNotNeeded } from './helpers';
+import taskDisplay from './taskDisplay';
 
 // sets up the page to prepare for displaying tasks
 const topNavDisplayHandler = (project) => {
@@ -20,7 +19,6 @@ const topNavDisplayHandler = (project) => {
   taskDisplay(project);
 };
 
-
 // sets up the all tasks project using project manager
 const allTasksDisplay = () => {
   const allTasksProject = projectFactory('All Tasks');
@@ -32,7 +30,6 @@ const allTasksDisplay = () => {
   topNavDisplayHandler(allTasksProject);
 };
 
-
 // sets up the today tasks project using project manager
 const todayTasksDisplay = () => {
   const today = new Date();
@@ -43,16 +40,15 @@ const todayTasksDisplay = () => {
       if (isSameDay(today, task.dueDate)) {
         todayTasksProject.addTask(task);
       }
-    })
-  })
+    });
+  });
 
   topNavDisplayHandler(todayTasksProject);
 };
 
-
 // sets up this weeks tasks project
 const thisWeeksDisplay = () => {
-  const today = new Date()
+  const today = new Date();
   const thisWeeksProject = projectFactory('This Week');
 
   projectManager.getProjects().forEach((project) => {
@@ -60,12 +56,11 @@ const thisWeeksDisplay = () => {
       if (isSameWeek(today, task.dueDate)) {
         thisWeeksProject.addTask(task);
       }
-    })
-  })
+    });
+  });
 
   topNavDisplayHandler(thisWeeksProject);
 };
-
 
 // sets up the important tasks project
 const importantTasksDisplay = () => {
@@ -75,13 +70,12 @@ const importantTasksDisplay = () => {
     project.getTasks().forEach((task) => {
       if (task.important === true) {
         importantTasksProject.addTask(task);
-      };
+      }
     });
   });
 
   topNavDisplayHandler(importantTasksProject);
 };
-
 
 // event listeners for each topNav div
 const topNavStuff = (() => {

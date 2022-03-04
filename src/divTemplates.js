@@ -19,7 +19,6 @@ const taskButtonTemplate = () => {
   return taskButton;
 };
 
-
 // a task description is created for each task on a page, hidden by default
 // rendered on task click
 const taskDescriptionTemplate = (task, idx) => {
@@ -28,7 +27,7 @@ const taskDescriptionTemplate = (task, idx) => {
   taskDescription.dataset.index = idx;
 
   const title = document.createElement('p');
-  title.textContent = 'Description: '
+  title.textContent = 'Description: ';
   title.style.fontWeight = 'bold';
   title.style.textDecoration = 'underline';
 
@@ -41,7 +40,6 @@ const taskDescriptionTemplate = (task, idx) => {
 
   return taskDescription;
 };
-
 
 // a task template for each task on a project page
 const taskTemplate = (task, idx) => {
@@ -61,7 +59,6 @@ const taskTemplate = (task, idx) => {
   starImg.setAttribute('id', 'star-img');
   templateDiv.appendChild(starImg);
 
-
   const nameText = document.createElement('p');
   nameText.textContent = task.title;
   templateDiv.appendChild(nameText);
@@ -74,7 +71,7 @@ const taskTemplate = (task, idx) => {
   const date = document.createElement('p');
   date.setAttribute('id', 'dateDisplay');
   if (task.dueDate === '') {
-    date.textContent = ''
+    date.textContent = '';
   } else {
     date.textContent = `Due: ${format(task.dueDate, 'MM-dd-yyyy')}`;
   }
@@ -90,7 +87,6 @@ const taskTemplate = (task, idx) => {
 
   return templateDiv;
 };
-
 
 // templates for the bottom nav divs, which display the project names and
 // render the project page on click
@@ -120,5 +116,5 @@ export {
   taskTemplate,
   taskButtonTemplate,
   taskDescriptionTemplate,
-  bottomNavDivTemplate
+  bottomNavDivTemplate,
 };
