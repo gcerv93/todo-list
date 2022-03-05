@@ -72,25 +72,20 @@ const taskDisplay = (project, bottom = false) => {
     }
 
     taskDiv.addEventListener("click", () => {
-      getComputedStyle(descriptionDiv).display === "none"
-        ? (descriptionDiv.style.display = "flex")
-        : (descriptionDiv.style.display = "none");
+      descriptionDiv.style.display =
+        getComputedStyle(descriptionDiv).display === "none" ? "flex" : "none";
     });
 
     checkImg.addEventListener("click", (e) => {
       e.stopPropagation();
-      checkImg.src === GreenCheck
-        ? (checkImg.src = Unchecked)
-        : (checkImg.src = GreenCheck);
+      checkImg.src = checkImg.src === GreenCheck ? Unchecked : GreenCheck;
       task.changeFinished();
       saveStorage();
     });
 
     starImg.addEventListener("click", (e) => {
       e.stopPropagation();
-      starImg.src === StarFilled
-        ? (starImg.src = StarOutline)
-        : (starImg.src = StarFilled);
+      starImg.src = starImg.src === StarFilled ? StarOutline : StarFilled;
       task.changeImportance();
       saveStorage();
     });
